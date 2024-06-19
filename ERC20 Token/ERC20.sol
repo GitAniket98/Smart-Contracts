@@ -17,6 +17,7 @@ contract ERC20 is IERC20 {
         decimals = _decimals;
     }
 
+    // Function to transfer tokens for msg.sender to recipient
     function transfer(
         address recipient,
         uint256 amount
