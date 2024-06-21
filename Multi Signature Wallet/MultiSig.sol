@@ -30,7 +30,7 @@ contract MultiSig {
         require(isOwner[msg.sender], "Not owner");
         _;
     }
-
+    // Modifier to check for transaction execution
     modifier notExecuted(uint256 _txId) {
         require(!transactions[_txId].executed, "Already executed");
         _;
