@@ -24,6 +24,7 @@ contract MultiSig {
     mapping(uint => mapping(address => bool)) public approved;
 
     uint public required;
+    // Modifier to check for onlyOwner
 
     modifier onlyOwner() {
         require(isOwner[msg.sender], "Not owner");
