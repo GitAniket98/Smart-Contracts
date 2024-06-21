@@ -24,12 +24,13 @@ contract MultiSig {
     mapping(uint => mapping(address => bool)) public approved;
 
     uint public required;
+    // Modifier to check for onlyOwner
 
     modifier onlyOwner() {
         require(isOwner[msg.sender], "Not owner");
         _;
     }
-
+    // Modifier to check for transaction execution
     modifier notExecuted(uint256 _txId) {
         require(!transactions[_txId].executed, "Already executed");
         _;
