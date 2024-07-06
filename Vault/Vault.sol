@@ -24,4 +24,39 @@ contract Vault {
         totalSupply -= _amount;
         balanceOf[_from] -= _amount;
     }
+
+    function deposit(uint256 _amount) external {
+        // a = amount
+        // T = total supply
+        // B = balance of token before deposit
+        // s = shares to mint
+
+        // (T + s)/T = (B + a)/B
+
+        // s = (a * T) / B
+
+        uint256 shares;
+
+        if (totalSupply == 0) {
+            shares = _amount;
+        } else {
+            shares = (_amount * totalSupply) / token.balanceOf(address(this));
+        }
+
+        _mint(msg.sender, shares);
+        token.transferFrom(msg.sender, address(this), _amount);
+    }
+
+    function withdraw(uint256 _shares) external {
+        // a = amount
+        // T = total supply
+        // B = balance of token before deposit
+        // s = shares to burn
+
+        // (T - s)/T = (B - a)/B
+        // a = (s*B)/T
+
+        uint256 amount = (_shares * token.balanceOf(address(this))) /
+            totalSupply;
+    }
 }
