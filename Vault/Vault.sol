@@ -58,5 +58,8 @@ contract Vault {
 
         uint256 amount = (_shares * token.balanceOf(address(this))) /
             totalSupply;
+
+        _burn(msg.sender, _shares);
+        token.transfer(msg.sender, amount);
     }
 }
